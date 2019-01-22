@@ -17,6 +17,8 @@ Ce _patch_ Pure Data traite un signal sonore (originalement pour la guitare) en 
 
 ### Contrôles
 
+![Capture d'écran : contrôles](principal.png?raw=true "Contrôles")
+
 - L'interrupteur **Tremolo** (en haut, à droite) active l'effet du tremolo aléatoire en multipliant le volume du signal par le paramètre aléatoire affiché juste à sa gauche. Ce paramètre est généré aléatoirement en fonction des réglages de gauche :
     - l'**amplitude** est définie de 0 à 100. À 100, le paramètre du tremolo varie de 0,5 à 1,5;
     - le (*taux** de génération d'une valeur aléatoire est réglé en millisecondes.
@@ -26,3 +28,12 @@ Ce _patch_ Pure Data traite un signal sonore (originalement pour la guitare) en 
     - le **taux** de génération d'une valeur aléatoire est réglé en millisecondes.
 
 - Le réglage **mélange** représente la proportion du signal allant de 0 (seulement le signal d'origine, _dry_) à 1 (seulement le signal affecté, _wet_).
+
+### Logique
+
+![Capture d'écran : logique](logique.png?raw=true "Logique")
+
+L'arithmétique est relativement simple :
+
+- Pour le **tremolo**, le nombre aléatoire (entre 0 et X) est divisé par la moitié de X (X est l'amplitude réglée). Le résultat est divisé par 100, puis additionné à 1.
+- Pour le **hachoir**, le seuil est soustrait du nombre aléatoire (entre 0 et 100). Si le résultat est négatif, il est forcé à 0.
